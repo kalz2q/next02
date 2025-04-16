@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "learning react";
+  });
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <title>タイトル変えてみる</title>
-      <header className="text-center text-6xl">はろーはろはろ</header>
+      {/* <title>タイトル変えてみる</title> */}
+      <header className="text-center text-6xl">はろーはろはろはろ</header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
