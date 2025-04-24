@@ -1,0 +1,82 @@
+1. 状態管理（State）
+以下の状態をuseStateで管理しています：
+
+display: 現在の表示値（文字列、初期値は"0"）
+
+firstOperand: 最初の数値（nullまたは数値）
+
+operator: 選択された演算子（nullまたは"+"、"-"、"*"、"/"）
+
+waitingForSecondOperand: 次の数値入力を待っているかどうか（ブール値）
+
+2. 主要な関数
+(1) inputDigit(digit: string)
+数字ボタンが押されたときに呼ばれる。
+
+waitingForSecondOperandがtrueの場合は表示をリセットして新しい数字を表示。
+
+それ以外の場合は現在の表示値に数字を追加。
+
+(2) inputDecimal()
+小数点ボタン（.）が押されたときに呼ばれる。
+
+既に小数点が含まれている場合は無視。
+
+(3) clearDisplay()
+AC（オールクリア）ボタンが押されたときに呼ばれる。
+
+すべての状態をリセット。
+
+(4) handleOperator(nextOperator: string)
+演算子（+, -, *, /）が押されたときに呼ばれる。
+
+現在の表示値をfirstOperandとして保存し、次の数値入力を待つ。
+
+(5) performCalculation()
+実際の計算を行う。
+
+firstOperandと現在の表示値に対して、operatorに応じた計算を実行。
+
+(6) calculateResult()
+=（イコール）ボタンが押されたときに呼ばれる。
+
+performCalculation()を実行して結果を表示。
+
+(7) handlePercentage()
+%（パーセント）ボタンが押されたときに呼ばれる。
+
+現在の表示値を100で割る。
+
+(8) toggleSign()
++/-（符号反転）ボタンが押されたときに呼ばれる。
+
+現在の表示値の符号を反転。
+
+3. UI（Tailwind CSS スタイリング）
+電卓全体: bg-white, rounded-lg, shadow-lg
+
+ディスプレイ: bg-gray-50, text-right
+
+数字ボタン: bg-gray-200, hover:bg-gray-300
+
+演算子ボタン: bg-amber-500, hover:bg-amber-600, text-white
+
+クリアボタン: bg-red-500, hover:bg-red-600
+
+4. 電卓の動作フロー
+数字入力 → inputDigit() で display を更新。
+
+演算子入力 → handleOperator() で firstOperand と operator を設定。
+
+2つ目の数字入力 → inputDigit() で新しい数字を入力。
+
+= ボタン押下 → calculateResult() で計算結果を表示。
+
+5. 追加機能
+連続計算: 複数の演算を続けて実行可能（例: 1 + 2 = 3 + 5 = 8）。
+
+小数点入力: inputDecimal() で . を追加。
+
+符号反転: toggleSign() で +/- を切り替え。
+
+パーセント計算: handlePercentage() で % 計算。
