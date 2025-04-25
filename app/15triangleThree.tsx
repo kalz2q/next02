@@ -5,24 +5,17 @@ import * as THREE from "three";
 
 export default function WebGLAnimation() {
   const mountRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>(0);
+  const animationRef = useRef<number>();
   const timeRef = useRef<number>(0);
 
   // MODEL & UPDATE
-  function handleAnimationFrame(delta: number) {
-    // Deltaを制限して、動きが急激にならないようにする
-    const maxDelta = 1000; // 最大deltaを0.1秒に制限
-    delta = Math.min(delta, maxDelta); // deltaがmaxDeltaより大きくならないようにする
-
-    // スピードを調整
-    const speedFactor = 0.1;
-    timeRef.current += (delta / 1000) * speedFactor; // Convert to seconds and slow it down
+  const handleAnimationFrame = (delta: number) => {
+    timeRef.current += delta / 1000; // Convert to seconds
     return timeRef.current;
-  }
+  };
 
   // VIEW (Three.js scene setup)
   useEffect(() => {
-    const mountNode = mountRef.current;
     if (!mountRef.current) return;
 
     // Scene setup
@@ -89,7 +82,7 @@ export default function WebGLAnimation() {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      mountNode?.removeChild(renderer.domElement);
+      mountRef.current?.removeChild(renderer.domElement);
     };
   }, []);
 
