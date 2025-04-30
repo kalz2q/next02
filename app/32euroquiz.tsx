@@ -493,7 +493,7 @@ export default function Home() {
           ヨーロッパの国クイズ
         </h1>
 
-        <div className="grid grid-cols-3 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* 周辺の国表示エリア */}
           <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
             <h2 className="text-lg font-semibold mb-2 text-green-700">
